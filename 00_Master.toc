@@ -1,0 +1,73 @@
+\babel@toc {ngerman}{}
+\contentsline {chapter}{\numberline {1}Vorwort}{6}{chapter.1}%
+\contentsline {section}{\numberline {1.1}\texttt {B1B} - Was ist das?}{6}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Motivation}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Literatur und Grundlagen}{6}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Grundlagen}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Variablen \& Datentypen}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Bezeichner}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Deklaration}{7}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Initalisierung}{7}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Konstanten}{8}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Datentypen}{8}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Enumeration}{8}{subsection.2.1.6}%
+\contentsline {section}{\numberline {2.2}Arrays}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Mehrdimensionale Arrays}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Rechteckige Arrays}{9}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Ungleichförmige Arrays}{9}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Speicherverwaltung}{9}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Stack \& Heap}{10}{subsection.2.4.1}%
+\contentsline {subsubsection}{\nonumberline Stack}{10}{section*.5}%
+\contentsline {subsubsection}{\nonumberline Heap}{10}{section*.6}%
+\contentsline {section}{\numberline {2.5}Sichere Zuweisung}{10}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Vorgabewerte}{10}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Operatoren}{10}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Arithmetische Operatoren}{10}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Vergleichsoperatoren}{11}{subsection.2.7.2}%
+\contentsline {subsection}{\numberline {2.7.3}Logische Operatoren}{11}{subsection.2.7.3}%
+\contentsline {subsection}{\numberline {2.7.4}Ternäre Bedingungsoperator}{11}{subsection.2.7.4}%
+\contentsline {subsection}{\numberline {2.7.5}Null-Verbindungsoperator}{11}{subsection.2.7.5}%
+\contentsline {subsection}{\numberline {2.7.6}Null-Bedingungsoperator}{11}{subsection.2.7.6}%
+\contentsline {subsection}{\numberline {2.7.7}sonstige Operatoren}{11}{subsection.2.7.7}%
+\contentsline {subsection}{\numberline {2.7.8}\texttt {checked} \& \texttt {unchecked}}{11}{subsection.2.7.8}%
+\contentsline {subsection}{\numberline {2.7.9}Bitoperatoren}{12}{subsection.2.7.9}%
+\contentsline {subsection}{\numberline {2.7.10}8 und 16 bit Ganzzahlen}{12}{subsection.2.7.10}%
+\contentsline {subsection}{\numberline {2.7.11}String \& Char}{12}{subsection.2.7.11}%
+\contentsline {subsubsection}{\nonumberline Vergleichen von Strings}{12}{section*.7}%
+\contentsline {section}{\numberline {2.8}Numerische Umwandlung}{13}{section.2.8}%
+\contentsline {subsection}{\numberline {2.8.1}Umwandlung reele in ganzzahlige Typen}{13}{subsection.2.8.1}%
+\contentsline {section}{\numberline {2.9}Anweisungen}{13}{section.2.9}%
+\contentsline {subsection}{\numberline {2.9.1}Auswahl}{13}{subsection.2.9.1}%
+\contentsline {subsubsection}{\nonumberline if-Anweisung}{13}{section*.8}%
+\contentsline {subsubsection}{\nonumberline switch-Anweisung}{14}{section*.9}%
+\contentsline {subsection}{\numberline {2.9.2}Iterationsanweisung}{14}{subsection.2.9.2}%
+\contentsline {subsubsection}{\nonumberline while \& do-while-Schleifen}{14}{section*.10}%
+\contentsline {subsubsection}{\nonumberline for-Schleifen}{14}{section*.11}%
+\contentsline {subsubsection}{\nonumberline foreach-Schleifen}{15}{section*.12}%
+\contentsline {subsection}{\numberline {2.9.3}Sprunganweisungen}{15}{subsection.2.9.3}%
+\contentsline {chapter}{\numberline {3}Objektorientierung}{16}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Klassen}{16}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Felder}{16}{subsection.3.1.1}%
+\contentsline {subsubsection}{\nonumberline Konstante}{16}{section*.13}%
+\contentsline {subsection}{\numberline {3.1.2}Methoden}{16}{subsection.3.1.2}%
+\contentsline {subsubsection}{\nonumberline Expression-bodied Methoden}{16}{section*.14}%
+\contentsline {subsubsection}{\nonumberline Methoden überladen}{17}{section*.15}%
+\contentsline {subsubsection}{\nonumberline Lokale Methoden}{17}{section*.16}%
+\contentsline {subsection}{\numberline {3.1.3}Konstruktoren}{17}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Dekonstruktor}{17}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Objektinitialisierung}{18}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.6}this Referenz}{18}{subsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.1.7}Eigenschaften}{18}{subsection.3.1.7}%
+\contentsline {subsection}{\numberline {3.1.8}Indexer}{19}{subsection.3.1.8}%
+\contentsline {subsection}{\numberline {3.1.9}Statische Konstruktoren}{19}{subsection.3.1.9}%
+\contentsline {subsection}{\numberline {3.1.10}Statische Klassen}{20}{subsection.3.1.10}%
+\contentsline {subsection}{\numberline {3.1.11}Finalizer}{20}{subsection.3.1.11}%
+\contentsline {subsection}{\numberline {3.1.12}Partielle Klassen \& Methoden}{20}{subsection.3.1.12}%
+\contentsline {subsubsection}{\nonumberline Teilklassen}{20}{section*.17}%
+\contentsline {subsubsection}{\nonumberline Partielle Methoden}{21}{section*.18}%
+\contentsline {section}{\numberline {3.2}Strukturen}{21}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Vererbung}{22}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Virutelle \& abstrakte Methoden}{22}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Abstrakte Basisklassen}{22}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Interfaces}{22}{subsection.3.3.3}%
+\contentsline {chapter}{\numberline {4}Changelog}{23}{chapter.4}%

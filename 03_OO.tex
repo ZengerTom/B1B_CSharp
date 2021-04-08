@@ -1,0 +1,292 @@
+\chapter{Objektorientierung} 
+\section{Klassen}
+\begin{lstlisting}
+//Einfache Deklaration <class modifier> class <Klassenname>
+//Class Modifier public ist default
+class Foo
+{
+}
+\end{lstlisting}
+\subsection{Felder}
+Ein Feld ist eine Variable, welche einer Klasse zugehörig ist. Die Initialisierung ist optional.
+\begin{lstlisting}
+class Foo
+{
+	int a = 1, x = 10;
+	
+	public int b = 2;
+
+	//Feld kann nicht veraendert werden
+	readonly int c = 3;
+}
+\end{lstlisting}
+\subsubsection{Konstante}
+Eine Konstante ist ein statisches Feld dessen Wert sich nicht verändern kann.
+\begin{lstlisting}
+public const int a = 1;
+\end{lstlisting}
+\subsection{Methoden}
+\subsubsection{Expression-bodied Methoden}
+Methoden, die aus einem einzelnen Ausdruck bestehen, können kompakter geschrieben werden.
+\begin{lstlisting}
+//Methode
+int Foo (int x) {return x * 2};
+
+//Expression-bodied Methode
+int Foo (int x) => x * 2;
+
+//Void ist als Rueckgabetyp zulaessig
+void Foo (int x) => Console.WriteLine (x);
+\end{lstlisting}
+\subsubsection{Methoden überladen}
+Methoden mit dem gleichen Namen können überladen werden.
+\begin{lstlisting}
+void Foo (int x);
+void Foo (double x);
+void Foo (int x, float y);
+void Foo (float x, int y);
+\end{lstlisting}
+\subsubsection{Lokale Methoden}
+Seit C\# 7 können Methoden innerhalb einer anderen Methode definiert werden.
+\subsection{Konstruktoren}
+Konstruktoren führen den Initialisierungscode für eine Klasse oder Struct aus. Die Definition erfolgt wie bei einer Methode, allerdings müssen der Methodenname und der Klassenname übereinstimmen.
+\begin{lstlisting}
+public class Car
+{
+	int ps;
+	string marke;	
+	//Konstruktor
+	public Car (int p)
+	{
+		ps = p;
+	}
+
+	//Ueberladen des Konstruktors
+	public Car (int p, string a)
+	{
+		//Aufruf des anderen Konstruktos ueber this
+		: this (p)
+		{
+			marke = a;
+		}
+	}
+}
+ \end{lstlisting}
+\subsection{Dekonstruktor}
+Ein Dekonstruktor verhält sich gegensätzlich zum Konstruktor. Während der Konstruktor übergebene Werte den Feldern zuweist, weist der Dekonstruktor Feldwerte Variablen zu. Die Dekonstruktormethode muss den Namen \texttt{Deconstruct} tragen.
+\begin{lstlisting}
+class Rectangle
+{
+	public readonly float Width, Height;
+	public Rectangle (float width, float height)
+	{
+		Width = width; Height = height;
+	}
+
+	public void Deconstruct (out float width, out float height)
+		{ width = Width; height = Height; }
+}
+
+
+//Programmcode
+
+var rect = new Rectangle (3, 4);
+//Kurzform Dekonstruktoraufruf
+//rect.Deconstruct (out var width, out var height);
+(float width, float height) = rect;
+Console.WriteLine(
+\end{lstlisting}
+\subsection{Objektinitialisierung}
+Außer mit den Konstruktoren lassen sich Objekte auch über den Objektinitialisierer erzeugen. Dieser spricht alle von außen erreichbare Felder an.
+\begin{lstlisting}
+public class Pkw
+{
+	public int Ps;
+	public string Marke;
+	public boolean Getankt;
+}
+
+Pkw auto1 = new Pkw {Ps = 90, Marke = "Audi", Getankt = false};
+Pkw auto2 = new Pkw {Ps = 130, Marke = "VW", Getankt = true};
+\end{lstlisting}
+\subsection{this Referenz}
+Die Referenz \texttt{this} verweist auf die Instanz selbst.
+\begin{lstlisting}
+public class Mensch
+{
+	public Ehepartner;
+	public void Heiraten (Mensch Verlobt)
+	{
+		//Verlobter wird zu Ehepartner
+		Ehepartner = Verlobt;
+		//Aufrufende Instanz wird bei Verlobt als Ehepartner gesetzt
+		Verlobt.Ehepartner = this;
+	}
+}
+\end{lstlisting}
+\subsection{Eigenschaften}
+Eigenschaften erscheinen nach außen wie Felder, beinhalten jedoch, wie Methoden, eine Logik. Eine Eigenschaft wird wie ein Feld deklariert, besitzt jedoch einen \texttt{get/set}-Block. Die \textit{Eigenschafts-Accessoren} werden beim Lesen der Eigenschaft aufgerufen. Meist hat die Eigenschaft ein zugehöriges privates Feld "im Hintergrund". Zudem können Eigenschaften auch \textit{Expression-bodied} deklariert werden.\\[1em]
+Die häufigeste Anwendung ist die \textit{automatische Eigenschaft}, bei der Getter und Setter auf ein privates Feld des gleichen Types zugreifen. Der Compiler generiert dieses Feld automatisch. Seit C\# 6 können automatische Eigenschaften auch initialisiert werden. Die Sichtbarkeit von get \& set kann mit dem Zugriffsmodifikator gesetzt werden.
+\begin{lstlisting}
+public class Stock
+{
+	decimal currentPrice			//privates Feld
+	public decimal CurrentPrice	//sichtbare Eigenschaft
+	{
+		get {return currentPrice; }
+		set {currentPrice = value; }
+	}
+}
+//expression-bodied Eigenschaft ohne Feld
+public decimal Worth
+{
+	get => currentPrice * sharesOwned;
+	set => sharesOwned = value / currentPrice;
+}
+
+//initialisierte automatische Eigenschaft, schreibgeschuetzt
+public class Stock
+{
+	public decimal CurrentPrice { get; } = 123;
+}
+\end{lstlisting}
+\subsection{Indexer}
+Indexer stellen eine Syntax für den Zugriff auf die Elemente einer Klasse oder Struct bereit, welche eine Liste oder Dictonary kapselt (ähnlich des String Indexers).
+\begin{lstlisting}
+class Satz
+{
+	string[] woerter = "Vogel Quax zwickt Johnys Pferd Bim.".Split( );
+
+	//Indexer
+	public string this [int wordNum]
+	{
+		get { return words[wordNum]; }
+		set {words[wordNum] = value; }
+	}
+}
+\end{lstlisting}
+\subsection{Statische Konstruktoren}
+Ein statischer Konstruktor wird einmal pro Typ (nicht pro Instanz) ausgeführt. Es kann nur ein statischer Konstruktor definiert werden. Löst dieser Konstruktor eine unbehandelte Exception aus, wird der Typ für die gesamte Lebensdauer unbrauchbar. Der Konstrukor wird automatisch für der ersten Instanzierung aufgerufen und dient dazu statische Felder zu initialisieren oder Code abzuarbeiten, der nur einmal durchlaufen werden soll.
+\begin{lstlisting}
+class Test
+{
+	static Test() {...}	//Klassenname, keine Parameter
+}
+\end{lstlisting}
+\subsection{Statische Klassen}
+Eine statische Klasse kann nicht instanziert werden, deswegen dienen sie als Container für Methoden, welche Eingabeparameter verarbeiten und nicht auf interne Felder angewiesen sind. Eine statische Klasse beinhaltet nur statische Member.
+\begin{lstlisting}
+public static class EinfacheMathematik
+{
+	public static int Addiere3Zahlen (int a, int b, int c)
+	{
+		return a + b + c;
+	}
+}
+\end{lstlisting}
+\subsection{Finalizer}
+Finalizer sind Klassenmethoden, die ausgeführt werden, bevor der reservierte Speicher durch den Garbage Collector freigegeben wird. Der Compiler überschreibt die \texttt{Finalize}-Methode der Klasse \texttt{Object}.
+\begin{lstlisting}
+class Test
+{
+	~Test() {...}
+}
+\end{lstlisting}
+\subsection{Partielle Klassen \& Methoden}
+Diese Vorgehensweise ermöglicht das Aufteilen der Definition einer Klasse (oder Struct, Interface, Methode) auf zwei oder mehrere Quelldateien. Die einzelnen Teilklassen müssen die selbe Sichtbarkeit besitzen und durch das Schlüsselwort \texttt{partial} eingeleitet werden. Delegates und Enumerations können nicht partiell definiert werden.
+\subsubsection{Teilklassen}
+\begin{lstlisting}
+public partial class Bartender
+{
+	public void serveBeer() {...}
+}
+
+public partial class Bartender
+{
+	public void serveWhisky() {...}
+}
+\end{lstlisting}
+\subsubsection{Partielle Methoden}
+Eine Teilklasse kann eine partielle Methode enthalten. Eine partielle Methode besteht aus einer Definition und einer Implementierung. Dies kann dazu genutzt werden um automatisch generierten Code anzupassen (Definition automatisch generiert, Implementierung per Hand). Ohne Implementierung wird die Definition vom Compiler entfernt.
+\begin{lstlisting}
+//Definition
+public partial class Bartender
+{
+	//Returntyp immer void, keine out Parameter
+	partial void serveBeer() {...}
+}
+
+//Implementierung
+public partial class Bartender
+{
+	partial void serveBeer()
+	 {
+	Console.WriteLine("Do host a Hoibe");
+	}
+}
+\end{lstlisting}
+\section{Strukturen}
+Strukturen teilen sich einen großen Teil der Syntax mit Klassen. Allerdings gelten folgende Einschränkungen:
+\begin{itemize}
+\item Innerhalb einer Strukturdeklaration können keine Felder initialisiert werden (außer \texttt{static} oder \texttt{const})
+\item keinen Standardkonstruktor oder Finalizer (Initialisierung ohne \texttt{new}-Operator)
+\item Strukturen sind Werttypen (Klassen Verweistypen)
+\item Keine Vererbung
+\item Implementation von Schnittstellen und Konstruktoren mit Parametern möglich
+\end{itemize}
+\begin{lstlisting}
+public struct Koordinaten
+{
+    public int x, y;
+
+    public Koordinaten(int p1, int p2)
+    {
+        x = p1;
+        y = p2;
+    }
+}
+\end{lstlisting}
+\section{Vererbung}
+Die Basisklasse vererbt Felder, Attribute und Methoden an die abgeleitete Klasse (Spezialisierung \& Generalisierung. Eine abgeleitete Klasse kann nur eine Basisklasse haben.
+\begin{lstlisting}
+public class Drink
+{
+	public string name;
+}
+
+public class Alcohol : Drink
+{
+	public int alcohol_lvl;
+}
+
+public class Hotdrink : Drink
+{
+	public float temp;
+}
+\end{lstlisting}
+\subsection{Virutelle \& abstrakte Methoden}
+\begin{itemize}
+\item Wird eine Methode als \texttt{virtual} gekennzeichnet, \textbf{kann} die abgeleitete Klasse die Methode überschreiben
+\item Wird eine Methode als \texttt{abstract} gekennzeichnet, \textbf{muss} die die Methode in jeder abgeleiteten, nicht abstrakten, Klasse überschrieben werden
+\end{itemize}
+\begin{lstlisting}
+public class Drink
+{
+	abstract public void Drinking ();
+}
+
+public class Alcohol : Drink
+{
+	public override void  Drinking ()
+	{
+		//reduce amount of drinks
+		//increase blood alcohol level of drinker
+	}
+}
+\end{lstlisting}
+\subsection{Abstrakte Basisklassen}
+Eine abstrakte Basisklasse kann nicht instanziert werden und dient nur als Generalisierung.
+\subsection{Interfaces}
+
+
+

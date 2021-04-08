@@ -1,0 +1,350 @@
+\chapter{Grundlagen} 
+\section{Variablen \& Datentypen}
+\subsection{Bezeichner}
+\begin{itemize}
+\item Beginnen mit Buchstaben oder Unterstrich
+\item Bestehen aus Buchstaben, Zahlen und einigen Sonderzeichen
+\item Müssen eindeutig sein
+\item Argumente, lokale Variablen, private Felder in CamelCase, Rest in Pascal-Schreibweise
+\item Keine Schlüsselwörter
+\end{itemize}
+\subsection{Deklaration}
+\begin{lstlisting}
+//<Datentyp> <Variablenname>;
+
+int x;
+\end{lstlisting}
+\begin{itemize}
+\item Gültigkeitsbereich umfasst nur den Block der Deklaration
+\end{itemize}
+\subsection{Initalisierung}
+\begin{lstlisting}
+//<Datentyp> <Variablenname> = <Wert>;
+
+int x = 10;
+\end{lstlisting}
+\begin{itemize}
+\item Wertebereich beachten
+\item Hexadezimale Ganzzahlliterale (Präfix \texttt{0x})
+\item Binäre Ganzzahlliterale ab C\# 7.0 (Präfix \texttt{0b})
+\item Datentypen mit Nachkommastellen kennzeichnen\\
+Suffixe: double (1.1D), float (1.2F), decimal (1.3M), Suffix D redundant Compiler schließt automatisch auf Double
+\item Exponentialschreibweise zulässig (\texttt{1.5e-3)}
+\end{itemize}
+\subsection{Konstanten}
+\begin{lstlisting}
+const int x = 10;
+\end{lstlisting}
+\begin{itemize}
+\item Können während der Laufzeit nicht verändert werden
+\end{itemize}
+\subsection{Datentypen}
+\begin{tabular}{p{3cm}p{3cm}p{3cm}p{3cm}}
+\texttt{sbyte}	&\texttt{byte}	&\texttt{float}	&\texttt{bool}\\
+\texttt{short}	&\texttt{ushort}	&\texttt{double}	&\texttt{char}\\
+\texttt{int}		&\texttt{uint}	&\texttt{decimal} &\texttt{string}\\
+\texttt{long}	&\texttt{ulong}	&&\\
+\end{tabular}
+\subsection{Enumeration}
+\begin{lstlisting}
+//enum <Name> : <Datentyp> {<Name1> = <Wert>, ...}
+
+enum farbe : int 
+{
+rot = 0, schwarz = 1, blau = 2
+}
+\end{lstlisting}
+\begin{itemize}
+\item Aufzählung von Konstanten
+\item Thematisch zusammengehörend
+\end{itemize}
+\section{Arrays}
+\begin{lstlisting}
+//Deklaration Array mit der Laenge 10
+//Vorinitialisierung mit Standardwert null
+int[] numbers = new int[10]
+
+//Elemente initialisieren
+numbers[0] = 1;		
+
+//Deklaration und Initialisierung
+//mit Hilfe eines Initialisierungsausdrucks
+int[] numbers = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+//Arrays implementieren IEnumerable<T>
+foreach (int z in numbers) Console.Write (z);
+
+//Festlegen des Arraytyps durch Compiler (z.B. bei Parameteruebergabe)
+twoLetters ( new[] {'a','b');
+\end{lstlisting}
+\section{Mehrdimensionale Arrays}
+\subsection{Rechteckige Arrays}
+\begin{lstlisting}
+//Deklaration rechteckiges, zweidimensionales Array
+int [,] matrix = new int [3, 3];
+
+//Initialisierung
+int[,] matrix = new int[,]
+{
+	{0, 1, 2},
+	{3, 4, 5},
+	{6, 7, 8}
+};
+
+//Laenge der 1. Dimension
+int a = matrix.GetLength(0);
+
+//Laenge der 2. Dimension
+int b = matrix.GetLength(1);
+
+\end{lstlisting}
+\subsection{Ungleichförmige Arrays}
+Ungleichförmige Arrays werden mit aufeinanderfolgenden eckigen Klammern deklariert. Innere Dimensionen werden in der Deklaration nicht spezifiziert, da diese von unterschiedlicher Länge sein können. Innere Arrays werden auf \texttt{null} initialisiert und müssen manuell angelegt werden.
+\begin{lstlisting}
+//Deklaration und Anlegen der inneren Dimensionen
+int [][] matrix = new int [3][];
+
+matrix[0] = new int[1];
+matrix[1] = new int[3];
+matrix[2] = new int[4];
+
+//Vereinfachter Array-Initialisierungsausdruck, weglassen des new-Operators
+int[][] matrix =
+{
+	new int[] {0},
+	new int[] {1, 2, 3},
+	new int[] {4, 5, 6, 7}
+};
+
+\end{lstlisting}
+\section{Speicherverwaltung}
+Eine Variable repräsentiert einen Speicherbereich der einen Wert enthält. Diese werden auf dem Stack oder dem Heap abgelegt.
+\subsection{Stack \& Heap}
+\subsubsection{Stack}
+Der Stack ist ein Speicherbereich, welcher lokale Variablen und Parameter vorhält. Da lokale Variablen eine begrenzte Lebenszeit haben, wächst oder schrumpft der Stack beim Betreten \& Verlassen von Blöcken.
+\subsubsection{Heap}
+In diesem Speicherabschnitt werden Objekte abgelegt. Beim Anlegen eines neuen Objektes wird Speicherplatz reserviert und eine Referenz auf dieses Objekt zurückgegeben. Ein Garbage Collector kümmert sich zur Laufzeit des Programms um das Aufräumen.
+\section{Sichere Zuweisung}
+In C\# erfolgt (außerhalb von \texttt{unsafe} Blöcken) eine sichere Zuweisung. D.h.:
+\begin{itemize}
+\item Wertzuweisung, bevor auf lokale Variablen lesend zugegriffen werden kann
+\item Beim Aufruf einer Methode müssen Funktionsparameter gefüllt sein
+\item Alle anderen Variablen werden zur Laufzeit automatisch initialisiert.
+\end{itemize}
+\section{Vorgabewerte}
+Alle Instanztypen haben einen Vorgabewert (Ergebnis der Nullsetzung der Speicherbits). Bei Referenztypen \texttt{null}, numerische Typen und Enum 0 und Boolean \texttt{false}. Dieser Vorgabewert kann mit \texttt{default} angefordert werden.
+\section{Operatoren}
+\subsection{Arithmetische Operatoren}
+\begin{tabular}{p{3cm}p{5cm}}
++	&Addition\\
+- 	&Subtraktion\\
+* 	&Multiplikation\\
+/ 	&Division\\
+\%	&Modulo\\
+++	&Inkrement\\
+- -	&Dekrement\\
+\end{tabular}
+\subsection{Vergleichsoperatoren}
+\begin{tabular}{p{3cm}p{5cm}}
+<	&kleiner\\
+<= 	&kleiner gleich\\
+> 	&größer\\
+>=	&größer gleich\\
+==	&gleich\\
+!=	&ungleich\\
+\end{tabular}
+\subsection{Logische Operatoren}
+\begin{tabular}{p{3cm}p{5cm}}
+!	&kleiner\\
+\&\&	&kleiner gleich\\
+|| 	&größer\\
+\^{}	&größer gleich\\
+\end{tabular}
+\subsection{Ternäre Bedingungsoperator}
+\begin{lstlisting}
+//Falls Bedingung wahr ist, wird A1 ausgewertet, ansonsten A2
+//<Bedingung> ? <Ausdruck1> : <Ausdruck2>
+
+int a = (x > y) ? (x - y)  : (y - x);
+
+\end{lstlisting}
+\subsection{Null-Verbindungsoperator}
+\begin{lstlisting}
+//Wenn der Operand nicht null ist, wird er ausgewertet; ansonsten Standardwert
+//<Operand> ?? <Wert>
+int a = null;
+int b = a ?? 1;
+\end{lstlisting}
+\subsection{Null-Bedingungsoperator}
+\begin{lstlisting}
+//Aufruf von Methoden ohne NullReferenceException
+//<Objekt>?.<Methode>
+System.Text.Stringbuilder sb = null;
+string s = sb?.ToString();
+\end{lstlisting}
+\subsection{sonstige Operatoren}
+\begin{tabular}{p{3cm}p{5cm}}
++	&Verkettung\\
+=	&Zuweisung\\
++=. -=, *=, /= 	&Verkürzungen\\
+\end{tabular}
+\subsection{\texttt{checked} \& \texttt{unchecked}}
+Mit dem \texttt{checked}-Operator kann die Laufzeitumgebung eine \texttt{OverflowException} auslösen. Sollte dies als Standard gesetzt werden, können mit \texttt{unchecked} einzelne Ausdrücke ausgenommen werden.
+\subsection{Bitoperatoren}
+\begin{tabular}{p{3cm}p{5cm}}
+\~{}	&Komplement\\
+\& 	&Und\\
+| 	&Oder\\
+\^{}	&XOR\\
+<<	&Verschiebung nach links\\
+>>	&Verschiebung nach rechts\\
+\end{tabular}
+\subsection{8 und 16 bit Ganzzahlen}
+In C\# besitzen \texttt{byte, sbyte, short, ushort} keine eigenen arithmetischen Operatoren. Diese Datentypen werden bei Bedarf implizit in größere Typen konvertiert. Dies kann zu Compilerfehlern führen.
+\subsection{String \& Char}
+\begin{lstlisting}
+//char
+char a = 'A';
+char newline = '\n';
+
+//Unicode Darstellung der Escapesequenz newline
+char newLine = '\u000A';
+
+//string
+string b = "Hallo";
+
+//interpolierter String (nur 1 Zeile)
+int x = 2;
+string b = $"Hallo, ihr {x}";
+
+//interpolierter String  (ueber mehrere Zeilen mit verbatim @)
+//verbatim unterstuetzt keine Escapesequenzen
+int y = 10;
+string b = $@"Absatz geht ueber {y} Zeilen";
+\end{lstlisting}
+\subsubsection{Vergleichen von Strings}
+\begin{lstlisting}
+//Auf Gleichheit
+string a, b = "Test";
+Console.Write (a == b); //True
+
+//Wertevergleich, vor dem zweiten (negativer Wert), nach dem zweiten (positiver Wert), gleich (0)
+Console.Write ("B".CompareTo("A"));	//1
+Console.Write ("B".CompareTo("B"));	//0
+Console.Write ("B".CompareTo("C"));	//-1
+\end{lstlisting}
+\section{Numerische Umwandlung}
+Eine Umwandlung erfolgt implizit, wenn der Zieltyp den Wert des Ausgangstyps darstellen kann. Ansonsten ist eine explizite Umwandlung unerlässlich.
+\begin{lstlisting}
+int x = 124;
+float a = 1.45F;
+
+//implizit
+long y = x;
+double b = a;
+
+//explizit
+short z = (short) x;
+float c = (float) b;
+
+//decimal muss immer explizit gecastet werden
+\end{lstlisting}
+\subsection{Umwandlung reele in ganzzahlige Typen}
+\begin{lstlisting}
+int x = 124;
+float a = 1.45F;
+
+//Ganzzahl zu Reele Zahl immer implizit, Fehler in der Genauigkeit moeglich
+float b = x;
+
+//Reele Zahl zu Ganzzahl immer explizit, Nachkommastellen werden abgeschnitten
+int y = (int) a;
+
+//decimal muss immer explizit gecastet werden
+\end{lstlisting}
+\section{Anweisungen}
+\subsection{Auswahl}
+\subsubsection{if-Anweisung}
+\begin{lstlisting}
+//if (Ausdruck) {...}
+if (s == true)
+{
+	a++;
+}
+
+//if else
+
+if (s == true)
+	a++;
+else
+	a--;
+\end{lstlisting}
+\subsubsection{switch-Anweisung}
+\begin{lstlisting}
+switch (trigger)
+{
+	case 1:
+		a = 2;
+		break;
+	case 2:
+		a = 3;
+		break;
+	case 3:
+		a = 2;
+		break;
+	case 4:
+		a = 3;
+		break;
+	default:
+		a = 0;
+		break;
+}
+\end{lstlisting}
+\begin{itemize}
+\item \texttt{break}: Beendet Anweisung
+\item \texttt{goto case x}: Springt zu Klausel x
+\item \texttt{goto default}: Springt zur default-Klausel
+\end{itemize}
+\subsection{Iterationsanweisung}
+\subsubsection{while \& do-while-Schleifen}
+\begin{lstlisting}
+int i = 10;
+while (i < 10)
+{
+	i++;
+}			//i = 10
+
+i = 10;
+do
+{
+	i++;
+}
+while (i < 10);		//i = 11
+\end{lstlisting}
+\subsubsection{for-Schleifen}
+Es können Teile der for-Anweisung weggelassen werden. Außerdem können mehrere Iterationsvariablen gesetzt werden.
+\begin{lstlisting}
+//for (Initialisierung; Bedingung; Iteration) {...}
+for (int i = 0; i < 10; i++)
+{
+	Console.WriteLine(i);	//Ausgabe: Zahlen von 0 bis 9
+}
+\end{lstlisting}
+\subsubsection{foreach-Schleifen}
+Diese Schleifen iterieren über jedes Element eines aufzählbaren Objekts.
+\begin{lstlisting}
+//foreach <Typ> elementname in <Objekt>
+foreach (char c in "Bier")
+	Console.WriteLine (c + " ");		// B i e r
+\end{lstlisting}
+\subsection{Sprunganweisungen}
+\begin{itemize}
+\item \texttt{break}: Beendet Ausführung des Blockes
+\item \texttt{continue}: Setzt Anweisung mit nächster Iteration fort
+\item \texttt{goto}: Sprung zu einer Marke
+\item \texttt{return}: Beendet Methode und liefert definierten Rückgabewert
+\end{itemize}
+
+
+
+
